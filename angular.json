@@ -7,6 +7,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "brawl-tournaments-frontend": {
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "ru": "src/locale/messages.ru.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,11 +26,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/brawl-tournaments-frontend",
+            "localize": [
+              "en"
+            ],
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -35,7 +45,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },
@@ -83,7 +94,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
