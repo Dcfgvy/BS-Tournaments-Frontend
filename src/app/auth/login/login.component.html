@@ -1,0 +1,92 @@
+<p-toast/>
+<app-form-wrapper>
+  <div form-title i18n>
+    Welcome Back
+  </div>
+  <!-- <div form-header>
+    <span i18n class="text-600 font-medium line-height-3">Don't have an account?</span>
+    <a i18n class="font-medium ml-2 cursor-pointer" routerLink="/register">Create today!</a>
+  </div> -->
+  <form form-content [formGroup]="loginForm" (ngSubmit)="login()">
+    <label i18n for="tag" class="block text-900 font-medium mb-2">Brawl Stars Tag</label>
+    <p-inputgroup class="mb-3">
+      <p-inputgroup-addon>
+        #
+      </p-inputgroup-addon>
+      <input
+      pInputText
+      id="tag"
+      name="tag"
+      i18n-placeholder
+      placeholder="Tag"
+      pKeyFilter="alphanum"
+      formControlName="tag">
+    </p-inputgroup>
+
+    <label i18n for="password" class="block text-900 font-medium mb-2">Password</label>
+    <input
+    pInputText
+    id="password"
+    name="password"
+    type="password"
+    i18n-placeholder
+    placeholder="Password"
+    class="w-full mb-3"
+    [pKeyFilter]="blockSpace"
+    formControlName="password">
+
+    @if(
+      (loginForm.invalid && (loginForm.dirty || loginForm.touched)) ||
+      invalidCredentials
+    ){
+      <div class="alert mb-3">
+        @if(invalidCredentials){
+          <div i18n>
+            Invalid credentials
+          </div>
+        }
+        @else if(loginForm.controls.tag.invalid){
+          @if(loginForm.controls.tag.hasError('required')){
+            <div i18n>
+              Tag is required
+            </div>
+          }
+          @else if (loginForm.controls.tag.hasError('minlength')) {
+            <div i18n>
+              Tag must be at least 4 characters long.
+            </div>
+          }
+          @else if (loginForm.controls.tag.hasError('maxlength')) {
+            <div i18n>
+              Tag must not exceed 20 characters in length.
+            </div>
+          }
+        }
+        @else if (loginForm.controls.password.invalid) {
+          @if(loginForm.controls.password.hasError('required')){
+            <div i18n>
+              Password is required
+            </div>
+          }
+          @else if (loginForm.controls.password.hasError('minlength')) {
+            <div i18n>
+              Password must be at least 6 characters long.
+            </div>
+          }
+          @else if (loginForm.controls.password.hasError('maxlength')) {
+            <div i18n>
+              Password must not exceed 32 characters in length.
+            </div>
+          }
+        }
+      </div>
+    }
+
+    <div class="flex align-items-center justify-content-between mb-5">
+      <a i18n class="font-medium ml-2 cursor-pointer">Forgot password?</a>
+    </div>
+
+    <button i18n pButton type="submit" class="w-full" [disabled]="loginForm.invalid" [loading]="loading">Sign In</button>
+  </form>
+
+</app-form-wrapper>

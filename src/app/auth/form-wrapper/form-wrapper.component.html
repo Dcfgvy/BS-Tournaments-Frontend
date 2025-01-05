@@ -1,0 +1,15 @@
+<div class="surface-card p-4 my-auto w-full lg:w-6 mx-auto">
+  <div class="text-center mb-3">
+    <!-- title -->
+    <div class="text-900 text-3xl font-medium mb-3 highlight">
+      <ng-content select="[form-title]"></ng-content>
+    </div>
+    <!-- optional content in header -->
+    <ng-content select="[form-header]"></ng-content>
+  </div>
+
+  <div>
+    <!-- content -->
+    <ng-content select="[form-content]"></ng-content>
+  </div>
+</div>

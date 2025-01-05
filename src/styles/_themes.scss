@@ -1,45 +1,60 @@
-/* Light Theme */
-:root {
-  --primary-color: #3B82F6; /* Electric Blue */
-  --secondary-color: #FF6A3D; /* Sunset Orange */
-  --background-color: #F2F2F2; /* Platinum Gray */
-  --text-color: #1E1E2C; /* Midnight Black */
-  --success-color: #3DFF70; /* Toxic Green */
-  --error-color: #FF6A3D; /* Sunset Orange */
-  --highlight-color: #8A2BE2; /* Vibrant Purple */
-}
+$highlight-color: #8A2BE2;
 
-/* Dark Theme */
-.dark-theme {
-  --primary-color: #3B82F6; /* Electric Blue */
-  --secondary-color: #FF6A3D; /* Sunset Orange */
-  --background-color: #1E1E2C; /* Midnight Black */
-  --text-color: #F2F2F2; /* Platinum Gray */
-  --success-color: #3DFF70; /* Toxic Green */
-  --error-color: #FF6A3D; /* Sunset Orange */
-  --highlight-color: #FF4088; /* Hot Pink */
-}
+// /* Light Theme */
+// :root {
+//   --primary-color: #3B82F6; /* Electric Blue */
+//   --secondary-color: #FF6A3D; /* Sunset Orange */
+//   --background-color: #F2F2F2; /* Platinum Gray */
+//   --text-color: #1E1E2C; /* Midnight Black */
+//   --success-color: #3DFF70; /* Toxic Green */
+//   --error-color: #FF6A3D; /* Sunset Orange */
+//   --highlight-color: #8A2BE2; /* Vibrant Purple */
+// }
 
-/* Override PrimeNG styles with CSS variables */
-.p-button {
-  background-color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
-  color: var(--text-color) !important;
-  font-weight: 600;
-}
+// /* Dark Theme */
+// .dark-theme {
+//   --primary-color: #3B82F6; /* Electric Blue */
+//   --secondary-color: #FF6A3D; /* Sunset Orange */
+//   --background-color: #1E1E2C; /* Midnight Black */
+//   --text-color: #F2F2F2; /* Platinum Gray */
+//   --success-color: #3DFF70; /* Toxic Green */
+//   --error-color: #FF6A3D; /* Sunset Orange */
+//   --highlight-color: #8A2BE2; /* Vibrant Purple */
+// }
 
-.p-inputtext {
-  background-color: var(--background-color) !important;
-  color: var(--text-color) !important;
-  border-color: var(--highlight-color) !important;
-}
+// body{
+//   background-color: var(--background-color);
+// }
 
-.p-toast-success {
-  background-color: var(--success-color) !important;
-  color: var(--text-color) !important;
-}
+// /* Override PrimeNG styles with CSS variables */
+// .p-button {
+//   background-color: var(--primary-color) !important;
+//   border-color: var(--primary-color) !important;
+//   color: var(--text-color) !important;
+//   font-weight: 600;
+// }
 
-.p-toast-error {
-  background-color: var(--error-color) !important;
-  color: var(--text-color) !important;
+// .p-inputtext {
+//   background-color: var(--background-color) !important;
+//   color: var(--text-color) !important;
+// }
+
+// .p-toast-success {
+//   background-color: var(--success-color) !important;
+//   color: var(--text-color) !important;
+// }
+
+// .p-toast-error {
+//   background-color: var(--error-color) !important;
+//   color: var(--text-color) !important;
+// }
+
+a{
+  text-decoration: underline;
+  text-decoration-color: $highlight-color;
+  text-decoration-thickness: 0.2rem;
+  text-underline-offset: 0.25rem;
+}
+a[routerLink]:visited{
+  color: inherit;
 }
