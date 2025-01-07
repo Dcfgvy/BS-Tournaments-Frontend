@@ -7,8 +7,20 @@ import { IToken } from '../common/interfaces/token.interface';
   providedIn: 'root'
 })
 export class AuthService extends HttpService {
-  login(data: { tag: string; password: string }){
+  login(data: {
+    tag: string;
+    password: string;
+  }){
     return this.http.post<IToken>(`${this.apiUrl}/users/login`, data);
+  }
+
+  register(data: {
+    tag: string;
+    password: string;
+    trophyChange: number;
+    language: string;
+  }){
+    return this.http.post(`${this.apiUrl}/users/register`, data);
   }
 
   fetchMe(): Observable<any> {

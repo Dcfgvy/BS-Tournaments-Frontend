@@ -29,15 +29,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                 });
                 break;
   
-              case 404:
-                this.messageService.add({
-                  severity: 'info',
-                  summary: $localize`Not Found`,
-                  detail: $localize`The requested resource could not be found.`,
-                  life: 3000,
-                });
-                break;
-  
               case 500:
                 this.messageService.add({
                   severity: 'error',

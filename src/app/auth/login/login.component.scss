@@ -1,5 +1,0 @@
-@use "sass:color";
-
-.alert>div{
-  color: color.adjust($color: red, $lightness: 10%);
-}

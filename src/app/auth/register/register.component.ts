@@ -13,12 +13,15 @@ import { catchError, concatMap, finalize, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { LocalStorageService } from '../../common/local-storage/local-storage.service';
-import { IToken } from '../../common/interfaces/token.interface';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { AppService } from '../../common/app-service/app.service';
+import { SliderModule } from 'primeng/slider';
+import { TrophyComponent } from "../../icons/trophy/trophy.component";
+import { PopoverModule } from 'primeng/popover';
+import { InfoCardComponent } from "../../info-card/info-card.component";
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [
     FormWrapperComponent,
     FormsModule,
@@ -31,14 +34,18 @@ import { AppService } from '../../common/app-service/app.service';
     RouterLink,
     KeyFilterModule,
     ToastModule,
-  ],
+    SliderModule,
+    TrophyComponent,
+    PopoverModule,
+    InfoCardComponent
+],
   providers: [MessageService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   blockSpace: RegExp = /^[^ ]+$/;
-  loginForm = new FormGroup({
+  registerForm = new FormGroup({
     tag: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -49,9 +56,15 @@ export class LoginComponent implements OnInit {
       Validators.minLength(6),
       Validators.maxLength(32),
     ]),
+    trophyChange: new FormControl(0, [
+      Validators.required,
+      Validators.min(-50),
+      Validators.max(20),
+    ]),
   });
   loading: boolean = false;
   invalidCredentials: boolean = false;
+  showTrophyChangeHelpCard: boolean = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -63,32 +76,38 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(){
     // Subscribe to valueChanges to transform the tag input to uppercase
-    this.loginForm.controls.tag.valueChanges.subscribe((value) => {
+    this.registerForm.controls.tag.valueChanges.subscribe((value) => {
       if(value){
         const upperValue = value.toUpperCase();
-        this.loginForm.controls.tag.setValue(upperValue, { emitEvent: false });
+        this.registerForm.controls.tag.setValue(upperValue, { emitEvent: false });
       }
     });
   }
 
-  login(): void {
-    if(this.loginForm.invalid) return;
+  get trophyChangeValue(): number {
+    return this.registerForm.controls.trophyChange.value ?? 0;
+  }
+
+  register(): void {
+    if(this.registerForm.invalid) return;
     
-    const { tag, password } = this.loginForm.value;
+    const { tag, password, trophyChange } = this.registerForm.value;
     this.loading = true;
 
     this.authService
-    .login({
+    .register({
       tag: '#' + (tag as string),
       password: password as string,
+      trophyChange: trophyChange as number,
+      language: 'en'
     })
     .pipe(
       concatMap((response) => {
-        let token: IToken = { ...response };
-        token.expiresAt = new Date().getTime() + 1000 * token.expiresIn;
-        this.localStorageService.clear();
-        this.localStorageService.setItem('token', JSON.stringify(token));
-        this.appService.fetchSettings();
+        // let token: IToken = { ...response };
+        // token.expiresAt = new Date().getTime() + 1000 * token.expiresIn;
+        // this.localStorageService.clear();
+        // this.localStorageService.setItem('token', JSON.stringify(token));
+        // this.appService.fetchSettings();
 
         return this.authService.fetchMe();
       }),

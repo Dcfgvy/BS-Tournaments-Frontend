@@ -1,0 +1,20 @@
+@if(show()){
+  <div @cardAnimation class="custom-card-overlay">
+    <p-card class="custom-card">
+      <ng-template #header>
+        <div class="flex flex-row justify-content-between p-3">
+          <span class="text-900 text-xl font-medium highlight mt-1">
+            <ng-content select="[card-title]"></ng-content>
+          </span>
+          <p-button (click)="show.set(false)" severity="secondary" icon="pi pi-times" variant="text" class="ma-2"></p-button>
+        </div>
+      </ng-template>
+      <div class="card-content">
+        <ng-content/>
+      </div>
+      <ng-template #footer>
+        <button i18n pButton (click)="show.set(false)" class="w-full" severity="secondary">Close</button>
+      </ng-template>
+    </p-card>
+  </div>
+}

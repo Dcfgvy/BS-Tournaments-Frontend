@@ -3,8 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { AppService } from './common/app-service/app.service';
-import { catchError, concatMap, throwError } from 'rxjs';
-import { LocalStorageService } from './common/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +15,6 @@ export class AppComponent implements OnInit {
   
   constructor(
     private readonly appService: AppService,
-    private readonly localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
