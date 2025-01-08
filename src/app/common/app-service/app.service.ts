@@ -13,10 +13,6 @@ export class AppService extends HttpService {
         this.localStorageService.setItem('settings', JSON.stringify(response));
         return [];
       }),
-      catchError((error) => {
-        console.error(error);
-        return throwError(() => error);
-      })
     )
     .subscribe();
   }

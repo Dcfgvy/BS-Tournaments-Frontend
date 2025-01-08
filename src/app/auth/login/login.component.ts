@@ -12,10 +12,9 @@ import { AuthService } from '../auth.service';
 import { catchError, concatMap, finalize, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { LocalStorageService } from '../../common/local-storage/local-storage.service';
-import { IToken } from '../../common/interfaces/token.interface';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { AppService } from '../../common/app-service/app.service';
+import { InfoCardComponent } from "../../info-card/info-card.component";
+import { LocalStorageService } from '../../common/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +30,8 @@ import { AppService } from '../../common/app-service/app.service';
     RouterLink,
     KeyFilterModule,
     ToastModule,
-  ],
+    InfoCardComponent,
+],
   providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -52,13 +52,13 @@ export class LoginComponent implements OnInit {
   });
   loading: boolean = false;
   invalidCredentials: boolean = false;
+  showForgotPasswordInstructions: boolean = false;
 
   constructor(
     private readonly authService: AuthService,
     private readonly messageService: MessageService,
-    private readonly localStorageService: LocalStorageService,
     private readonly router: Router,
-    private readonly appService: AppService,
+    private readonly localStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(){
@@ -69,6 +69,10 @@ export class LoginComponent implements OnInit {
         this.loginForm.controls.tag.setValue(upperValue, { emitEvent: false });
       }
     });
+  }
+
+  get botUsername(){
+    return JSON.parse(this.localStorageService.getItem('settings')!).botUsername;
   }
 
   login(): void {
@@ -83,18 +87,7 @@ export class LoginComponent implements OnInit {
       password: password as string,
     })
     .pipe(
-      concatMap((response) => {
-        let token: IToken = { ...response };
-        token.expiresAt = new Date().getTime() + 1000 * token.expiresIn;
-        this.localStorageService.clear();
-        this.localStorageService.setItem('token', JSON.stringify(token));
-        this.appService.fetchSettings();
-
-        return this.authService.fetchMe();
-      }),
-      concatMap((account) => {
-        this.localStorageService.setItem('account', JSON.stringify(account));
-
+      concatMap(() => {
         this.messageService.add({
           severity: 'success',
           summary: $localize`Signed in`,
@@ -106,8 +99,6 @@ export class LoginComponent implements OnInit {
       }),
       catchError((error) => {
         // this one works after the http interceptor
-        console.error('An error occurred:', error);
-
         if(error instanceof HttpErrorResponse){
           if(error.status == HttpStatusCode.BadRequest){
             this.invalidCredentials = true;

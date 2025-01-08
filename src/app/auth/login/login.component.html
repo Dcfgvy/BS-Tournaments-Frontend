@@ -5,7 +5,7 @@
   </div>
   <div form-header>
     <span i18n class="text-600 font-medium line-height-3">Don't have an account?</span>
-    <a i18n class="font-medium ml-2 cursor-pointer" routerLink="/register">Create today!</a>
+    <a i18n class="ml-2" routerLink="/register">Create today!</a>
   </div>
   <form form-content [formGroup]="loginForm" (ngSubmit)="login()">
     <label i18n for="tag" class="block text-900 font-medium mb-2">Brawl Stars Tag</label>
@@ -17,8 +17,7 @@
       pInputText
       id="tag"
       name="tag"
-      i18n-placeholder
-      placeholder="Tag"
+      placeholder="ABC123DE"
       pKeyFilter="alphanum"
       formControlName="tag">
     </p-inputgroup>
@@ -83,8 +82,21 @@
     }
 
     <div class="flex align-items-center justify-content-between mb-5">
-      <a i18n class="font-medium ml-2 cursor-pointer">Forgot password?</a>
+      <a i18n class="ml-2 internal_link" (click)="showForgotPasswordInstructions = true">Forgot password?</a>
     </div>
+
+    <app-info-card [(show)]="showForgotPasswordInstructions">
+      <div card-title i18n>Recover password</div>
+      <p i18n class="text-xl">1. Sign in via Telegram</p>
+      <p i18n>
+        If you had your Telegram account connected, then you can try to sign in from our Telegram Mini-App,
+        by <a [href]="'https://t.me/' + botUsername + '?startapp'" target="_blank">clicking here</a>.
+        You should open the Mini-App, using the account you connected.
+        <br><br><b>Hint:</b> Your Telegram account was automatically connected if you registered in the Mini-App, not on the website.
+      </p>
+      <p i18n class="text-xl">2. Update your password</p>
+      <p i18n>When signed in the Telegram Mini-App, go to <i>Settings > Update password</i>. There you will be able to choose a new password.</p>
+    </app-info-card>
 
     <button i18n pButton type="submit" class="w-full" [disabled]="loginForm.invalid" [loading]="loading">Sign In</button>
   </form>

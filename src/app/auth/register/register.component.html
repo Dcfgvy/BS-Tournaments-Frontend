@@ -5,10 +5,13 @@
   </div>
   <div form-header>
     <span i18n class="text-600 font-medium line-height-3">Already have an account?</span>
-    <a i18n class="font-medium ml-2 cursor-pointer" routerLink="/login">Sign in!</a>
+    <a i18n class="ml-2" routerLink="/login">Sign in!</a>
   </div>
   <form form-content [formGroup]="registerForm" (ngSubmit)="register()">
-    <label i18n for="tag" class="block text-900 font-medium mb-2">Your Brawl Stars Tag</label>
+    <label i18n for="tag" class="block text-900 font-medium mb-2">
+      Your Brawl Stars Tag
+      <i (click)="showTagHelpCard = true" class="pi pi-question-circle ml-2 cursor-pointer"></i>
+    </label>
     <p-inputgroup class="mb-3">
       <p-inputgroup-addon>
         #
@@ -17,11 +20,23 @@
       pInputText
       id="tag"
       name="tag"
-      i18n-placeholder
-      placeholder="Tag"
+      placeholder="ABC123DE"
       pKeyFilter="alphanum"
       formControlName="tag">
     </p-inputgroup>
+
+    <app-info-card [(show)]="showTagHelpCard">
+      <div card-title i18n>
+        Brawl Stars Tag
+      </div>
+      <p i18n class="text-xl">Why?</p>
+      <p i18n>Your tag is your main authenticator in the system. It is also used to confirm winners in tournaments.</p>
+      <p i18n class="text-xl">Where do I find it?</p>
+      <p i18n>First, click on the profile icon from the main page in Brawl Stars:</p>
+      <img src="images/screenshots/tag_instructions_screenshot_1.jpg" class="instructions_image">
+      <p i18n>On your profile page, your tag will be under the player icon:</p>
+      <img src="images/screenshots/tag_instructions_screenshot_2.jpg" class="instructions_image">
+    </app-info-card>
 
     <label i18n for="password" class="block text-900 font-medium mb-2">Create password</label>
     <input
@@ -46,15 +61,15 @@
       </p-button>
 
       <app-info-card [(show)]="showTrophyChangeHelpCard">
-        <div card-title>Account verification</div>
+        <div card-title i18n>Account verification</div>
 
-        <p class="text-xl">Why?</p>
-        <p>The trophy change after your last battle is just a simple method to verify that the Brawl Stars account is yours, since nobody else can see that information.</p>
-        <p class="text-xl">Where do I find it?</p>
-        <p>First, open the menu from the main page in Brawl Stars and go to Battle Log:</p>
-        <img src="images/trophy_change_screenshot_1.jpg" class="instructions_image">
-        <p>In your Battle Log, find the last battle you played (the top one) and notice the trophy change:</p>
-        <img src="images/trophy_change_screenshot_2.jpg" class="instructions_image">
+        <p i18n class="text-xl">Why?</p>
+        <p i18n>The trophy change after your last battle is just a simple method to verify that the Brawl Stars account is yours, since nobody else can see that information.</p>
+        <p i18n class="text-xl">Where do I find it?</p>
+        <p i18n>First, open the menu from the main page in Brawl Stars and go to Battle Log:</p>
+        <img src="images/screenshots/trophy_change_screenshot_1.jpg" class="instructions_image">
+        <p i18n>In your Battle Log, find the last battle you played (the top one) and notice the trophy change:</p>
+        <img src="images/screenshots/trophy_change_screenshot_2.jpg" class="instructions_image">
       </app-info-card>
 
       <label i18n for="trophy-slider" class="block text-900 font-medium ml-2">Your last battle trophy change: <br>
@@ -69,16 +84,21 @@
     [min]="-50"
     [max]="15"
     [step]="1" />
-    <p class="mt-1 text-color-secondary">Move the slider to select</p>
+    <p i18n class="mt-1 text-color-secondary text-sm">Move the slider to select</p>
 
     @if(
       (registerForm.invalid && (registerForm.dirty || registerForm.touched)) ||
-      invalidCredentials
+      invalidCredentials || tagTaken
     ){
       <div class="alert -mt-1 mb-2">
-        @if(invalidCredentials){
+        @if(tagTaken){
           <div i18n>
-            Invalid credentials
+            A user with this tag already exists.
+          </div>
+        }
+        @else if(invalidCredentials){
+          <div i18n>
+            Invalid data. Double-check the tag and trophy change
           </div>
         }
         @else if(registerForm.controls.tag.invalid){
@@ -119,6 +139,12 @@
     }
 
     <button i18n pButton type="submit" class="w-full mt-3" [disabled]="registerForm.invalid" [loading]="loading">Sign Up</button>
+    @if(inTelegram){
+      <p i18n class="text-color-secondary text-sm">
+        <i class="pi pi-check-circle text-sm mr-1" style="color: green;"></i>
+        Your Telegram account will be automatically connected
+      </p>
+    }
   </form>
 
 </app-form-wrapper>
