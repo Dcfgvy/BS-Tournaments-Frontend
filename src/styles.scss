@@ -2,6 +2,8 @@
 @use 'styles/themes';
 @use "sass:color";
 @import 'primeicons/primeicons.css';
+@import 'material-icons/iconfont/filled.css';
+@import 'material-icons/iconfont/outlined.css';
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap');
 
 /* Make Exo 2 the default font for the entire app */
@@ -12,7 +14,7 @@ body {
 }
 
 /* Ensure all text-related elements inherit the default font */
-h1, h2, h3, h4, h5, h6, p, span, a, div, input, textarea, button {
+h1, h2, h3, h4, h5, h6, p, span, label, a, div, input, textarea, button {
   font-family: inherit;
 }
 

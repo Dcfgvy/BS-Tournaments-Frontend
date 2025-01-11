@@ -1,0 +1,45 @@
+<p-card>
+  <ng-template #header>
+    <div class="flex flex-row justify-content-center align-items-center pl-2">
+      <img [ngSrc]="eventImgUrl() | fullImageUrl" height="30" width="30" style="margin-left: -30px;">
+      <p class="highlight text-lg ml-2">{{ eventName() }}</p>
+    </div>
+  </ng-template>
+
+  <div
+  class="map-container flex flex-row justify-content-center mb-3 -mt-4"
+  [style]="isMapImgSquare() ? 'heihgt: 200px;' : 'height: 150px;'"
+  >
+    <img
+      [src]="mapImgUrl() | fullImageUrl"
+      alt="Map" i18n-alt
+      [style]="isMapImgSquare() ? 'height: 200px;' : 'transform: rotate(-90deg); width: 150px;'"
+      class="border-round-md">
+  </div>
+  
+
+  <div class="w-full flex flex-row justify-content-center">
+    <div class="grid grid-nogutter" style="width: 300px;">
+      <div class="col-6">
+        <span>Entry fee: {{ entryCost() }} <app-coin/></span><br>
+      </div>
+      <div class="flex flex-row col-6">
+        <img src="images/1st_low.png" style="height: 1.5rem;" class="-mt-1 mr-1">
+        <span>First place: {{ firstPlacePrize() }}</span>
+      </div>
+      <div class="col-6 flex flex-row align-items-top">
+        <span>Players: {{ playersNumber() }}</span>
+        <div class="ml-1">
+          <span class="material-icons">group</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <span>Registered: {{ peopleRegistered() }}/{{playersNumber()}}</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #footer>
+    <p-button fluid [routerLink]="tournamentLink">View</p-button>
+  </ng-template>
+</p-card>

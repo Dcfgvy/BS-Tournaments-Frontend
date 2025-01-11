@@ -13,7 +13,11 @@
         <ng-content/>
       </div>
       <ng-template #footer>
-        <button i18n pButton (click)="show.set(false)" class="w-full" severity="secondary" type="button">Close</button>
+        <ng-content select="[card-footer]">
+            <p-button i18n pButton (click)="show.set(false)" fluid severity="secondary" type="button">
+              Close
+            </p-button>
+        </ng-content>
       </ng-template>
     </p-card>
   </div>

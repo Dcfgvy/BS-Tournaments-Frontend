@@ -1,0 +1,19 @@
+.nav_box{
+  background: var(--p-background-color) !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 55px;
+  border-top: 1px grey solid;
+}
+.nav_box>div>label{
+  font-size: .75rem;
+}
+.add_icon{
+  font-size: 1.75rem;
+}
+.nav_svg_icon{
+  color: var(--p-text-color);
+}

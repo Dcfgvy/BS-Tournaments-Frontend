@@ -19,7 +19,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.appService
-    .fetchSettings();
+    this.appService.fetchSettings();
+    // fetch settings every 15 seconds
+    setInterval(() => {
+      this.appService.fetchSettings();
+    }, 1000 * 15);
   }
 }

@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
   img{
     height: 1.2rem;
     vertical-align: middle;
+    margin-top: -0.2rem;
   }
   `
 })

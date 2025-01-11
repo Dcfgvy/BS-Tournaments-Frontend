@@ -49,6 +49,18 @@ $highlight-color: #8A2BE2;
 //   color: var(--text-color) !important;
 // }
 
+:root {
+  --p-background-color: var(--p-surface-0);
+}
+
+.app-dark {
+  --p-background-color: var(--p-surface-950);
+}
+
+.material-icons, .material-icons-outlined{
+  color: var(--p-text-color);
+}
+
 a[routerLink], .internal_link{
   text-decoration: underline;
   text-decoration-color: $highlight-color;

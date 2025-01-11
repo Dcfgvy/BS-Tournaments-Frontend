@@ -1,0 +1,4 @@
+.router-outlet-container {
+  height: 100%;
+  padding-bottom: calc(55px + 0.5rem); /* Matches the height of .nav_box + some extra space */
+}

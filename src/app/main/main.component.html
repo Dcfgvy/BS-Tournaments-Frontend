@@ -1,1 +1,51 @@
-<p>Main page!!</p>
+<div class="w-full flex flex-row justify-content-between align-items-center -mt-2">
+  <p class="text-2xl my-3 ml-2">Active tournaments</p>
+
+  <div class="flex flex-row align-items-center">
+    <p-button [rounded]="true" [text]="true">
+      <span class="material-icons" style="color: var(--p-text-color);" (click)="showFilters = true">filter_alt</span>
+    </p-button>
+    <app-theme-toggler class="mt-1"/>
+  </div>
+</div>
+
+<app-info-card [(show)]="showFilters">
+  <div card-title>Filters</div>
+  <p-button card-footer fluid>Submit</p-button>
+</app-info-card>
+
+<div class="tournaments-container">
+  <app-tournament-card
+  [tournamentId]="1"
+  [entryCost]="20"
+  eventImgUrl="/api/uploads/images/brawl-ball.png"
+  eventName="Brawlball"
+  mapImgUrl="https://media.brawltime.ninja/maps/15000051.png?size=512"
+  [isMapImgSquare]="false"
+  [playersNumber]="10"
+  [peopleRegistered]="7"
+  [firstPlacePrize]="50"
+  ></app-tournament-card>
+  <app-tournament-card
+  [tournamentId]="2"
+  [entryCost]="20"
+  eventImgUrl="/api/uploads/images/showdown.png"
+  eventName="Solo Showdown"
+  mapImgUrl="https://media.brawltime.ninja/maps/15000044.webp"
+  [isMapImgSquare]="true"
+  [playersNumber]="10"
+  [peopleRegistered]="8"
+  [firstPlacePrize]="50"
+  ></app-tournament-card>
+  <app-tournament-card
+  [tournamentId]="3"
+  [entryCost]="20"
+  eventImgUrl="/api/uploads/images/brawl-ball.png"
+  eventName="Brawlball"
+  mapImgUrl="https://media.brawltime.ninja/maps/15000051.png?size=512"
+  [isMapImgSquare]="false"
+  [playersNumber]="10"
+  [peopleRegistered]="7"
+  [firstPlacePrize]="50"
+  ></app-tournament-card>
+</div>

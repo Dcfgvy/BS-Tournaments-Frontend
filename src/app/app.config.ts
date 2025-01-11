@@ -5,7 +5,7 @@ import { providePrimeNG } from 'primeng/config';
 
 import { routes } from './app.routes';
 import { MyPreset } from './prime-preset';
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi, withNoXsrfProtection } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { LocalStorageService } from './common/local-storage/local-storage.service';
 import { ErrorInterceptor } from './common/interceptors/error.interceptor';
 import { MessageService } from 'primeng/api';
@@ -29,7 +29,10 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: MyPreset
+        preset: MyPreset,
+        options: {
+          darkModeSelector: '.app-dark'
+        }
       },
       ripple: true,
     }),
