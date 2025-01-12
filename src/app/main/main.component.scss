@@ -3,3 +3,17 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.p-chip>img{
+  margin-left: -5px;
+}
+.p-chip>span{
+  margin-left: -5px;
+  font-size: .875rem;
+}
+.header{
+  position: sticky;
+  top: 0;
+  background: var(--p-background-color) !important;
+  z-index: 100;
+}

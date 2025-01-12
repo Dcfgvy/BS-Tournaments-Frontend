@@ -2,23 +2,25 @@
   <div @cardAnimation class="custom-card-overlay">
     <p-card class="custom-card">
       <ng-template #header>
-        <div class="flex flex-row justify-content-between p-3">
+        <div class="flex flex-row justify-content-between p-3 card-header">
           <span class="text-900 text-xl font-medium highlight mt-1">
             <ng-content select="[card-title]"></ng-content>
           </span>
-          <p-button (click)="show.set(false)" severity="secondary" icon="pi pi-times" variant="text" class="ma-2"></p-button>
+          <p-button (click)="closeCard()" severity="secondary" icon="pi pi-times" variant="text" class="ma-2"></p-button>
         </div>
       </ng-template>
-      <div class="card-content">
+      <div class="card-content" [style]="'margin-bottom: ' + (footer() ? '1.5' : '0') + 'rem;'">
         <ng-content/>
       </div>
-      <ng-template #footer>
-        <ng-content select="[card-footer]">
-            <p-button i18n (click)="show.set(false)" fluid severity="secondary" type="button">
-              Close
-            </p-button>
-        </ng-content>
-      </ng-template>
+      @if(footer()){
+        <ng-template #footer>
+          <ng-content select="[card-footer]">
+              <p-button i18n (click)="closeCard()" fluid severity="secondary" type="button">
+                Close
+              </p-button>
+          </ng-content>
+        </ng-template>
+      }
     </p-card>
   </div>
 }

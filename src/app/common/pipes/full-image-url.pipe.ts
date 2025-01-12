@@ -10,7 +10,7 @@ export class FullImageUrlPipe implements PipeTransform {
     if(relativePath.startsWith('https://') || relativePath.startsWith('http://')){
       return relativePath;
     }
-    if(relativePath.startsWith('/api')) relativePath = relativePath.slice(4);
-    return `${environment.apiUrl}${relativePath}`;
+    if(relativePath.startsWith('api/')) relativePath = relativePath.slice(4);
+    return `${environment.apiUrl}/${relativePath}`;
   }
 }

@@ -1,3 +1,4 @@
+@use 'sass:color';
 $highlight-color: #8A2BE2;
 
 // /* Light Theme */
@@ -51,10 +52,15 @@ $highlight-color: #8A2BE2;
 
 :root {
   --p-background-color: var(--p-surface-0);
+  --p-text-color-secondary: color.adjust($color: var(--p-text-color), $lightness: 50%);
 }
 
 .app-dark {
   --p-background-color: var(--p-surface-950);
+}
+
+.text-secondary{
+  color: var(--p-text-secondary);
 }
 
 .material-icons, .material-icons-outlined{
@@ -71,4 +77,8 @@ a[routerLink], .internal_link{
 }
 a[routerLink]:visited{
   color: inherit;
+}
+
+.text-color-secondary{
+  color: colo
 }

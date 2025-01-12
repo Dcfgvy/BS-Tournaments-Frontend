@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .custom-card {
@@ -31,6 +31,10 @@
 }
 
 .card-content {
-  margin-bottom: 1.5rem;
   margin-top: -2.5rem;
+}
+
+.card-header {
+  position: sticky;
+  top: 0;
 }

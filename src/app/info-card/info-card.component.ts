@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, model } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 
@@ -25,4 +25,12 @@ import { CardModule } from 'primeng/card';
 })
 export class InfoCardComponent {
   show = model(false);
+  footer = input(true);
+
+  cardClosed = output<void>();
+
+  closeCard(){
+    this.cardClosed.emit();
+    this.show.set(false);
+  }
 }

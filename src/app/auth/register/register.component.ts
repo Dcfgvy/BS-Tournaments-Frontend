@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
     private readonly router: Router,
     private readonly tgService: TelegramService,
   ) {
-    this.inTelegram = tgService.initData === undefined ? false : true;
+    this.inTelegram = this.tgService.initData === undefined ? false : true;
   }
 
   ngOnInit(){
