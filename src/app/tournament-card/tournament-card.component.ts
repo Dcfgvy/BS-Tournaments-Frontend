@@ -26,7 +26,7 @@ export class TournamentCardComponent {
   eventName = input.required<string>();
 
   mapImgUrl = input.required<string>();
-  isMapImgSquare = input(true);
+  isMapImgSquare = input<boolean>(true);
 
   entryCost = input.required<number>();
   playersNumber = input.required<number>();

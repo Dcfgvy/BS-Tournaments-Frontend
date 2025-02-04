@@ -23,8 +23,8 @@ export class ThemeTogglerComponent {
    * Toggle theme between system, dark, and light.
    */
   toggleTheme(): void {
-    const themes = ['system', 'dark', 'light'];
-    const currentIndex = themes.indexOf(this.themeTogglerService.theme);
+    const themes = ['dark', 'light'];
+    const currentIndex = themes.indexOf(this.themeTogglerService.theme) || 0;
     this.themeTogglerService.theme = themes[(currentIndex + 1) % themes.length];
 
     this.themeTogglerService.applyTheme();

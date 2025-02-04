@@ -5,8 +5,7 @@ import { LocalStorageService } from '../common/local-storage/local-storage.servi
   providedIn: 'root'
 })
 export class ThemeTogglerService {
-  theme: string = 'system';
-  isDark: boolean = false;
+  theme: string = 'dark';
 
   constructor(
     private readonly localStorageService: LocalStorageService
@@ -19,7 +18,7 @@ export class ThemeTogglerService {
    */
   private loadTheme(): void {
     const savedTheme = this.localStorageService.getItem('theme');
-    this.theme = savedTheme ? savedTheme : 'system';
+    this.theme = savedTheme ? savedTheme : this.getSystemMode();
     this.applyTheme();
   }
 
@@ -28,22 +27,23 @@ export class ThemeTogglerService {
    */
   applyTheme(): void {
     const htmlElement = document.documentElement;
-    const isDarkMode = this.theme === 'dark' || (this.theme === 'system' && this.isSystemDarkMode());
 
-    if (isDarkMode) {
+    if(this.theme === 'dark') {
       htmlElement.classList.add('app-dark');
     } else {
       htmlElement.classList.remove('app-dark');
     }
 
-    this.isDark = isDarkMode;
     this.localStorageService.setItem('theme', this.theme);
   }
 
   /**
    * Detect if the system is in dark mode.
    */
-  private isSystemDarkMode(): boolean {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  private getSystemMode(): string {
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+      return 'dark';
+    }
+    return 'light';
   }
 }
